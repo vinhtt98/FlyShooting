@@ -8,18 +8,18 @@ var Objs = { //global objects
     Enemies: [{
         go: null,
         health: 15,
-        speed: 15
-    }],
-    Bullets: [{
-        go: null,
-        speed: null,
-        type: null
+        speed: 500,
+        atkRate: 0.25
     }],
     Player: {
         go: null,
         health: 100,
-        speed: 300
-    }
+        speed: 500,
+        atkRate: 0.25
+    },
+    enemyBullets: [],
+    playerBullets: [],
+    bulletSpeed: 1500
 }
 
 var timePlayed = 0; //game time

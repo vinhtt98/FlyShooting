@@ -5,6 +5,7 @@
 var Player = cc.Sprite.extend({//main scene
 
     h_val: 0,
+    cooldown: 0,
 
     ctor:function () {
         this._super(res.box_png);
@@ -29,27 +30,32 @@ var Player = cc.Sprite.extend({//main scene
     },
 
     update: function(dt){//update callback, run every frame
-        var turbo = KEYS[cc.KEY.shift] ? 5 : 1;
+        var turbo = KEYS[cc.KEY.shift] ? 4 : 1;
         var deltaX = this.getContentSize().width * this.getScale() / 2;
         var deltaY = this.getContentSize().height * this.getScale() / 2;
+        var isHold = false;
         if (KEYS[cc.KEY.up]) {
             this.y += dt * Objs.Player.speed * turbo;
-            this.setColor(this.HSVtoRGB(this.h_val/360, 1, 1));
-            this.h_val = (this.h_val + 5) % 360;
+            this.y = Math.min(this.y, cc.winSize.height - deltaY)
+            isHold = true;
         }
         if (KEYS[cc.KEY.down]) {
             this.y -= dt * Objs.Player.speed * turbo;
-            this.setColor(this.HSVtoRGB(this.h_val/360, 1, 1));
-            this.h_val = (this.h_val + 5) % 360;
+            this.y = Math.max(this.y, deltaY);
+            isHold = true;
         }
         if (KEYS[cc.KEY.left]) {
             this.x -= dt * Objs.Player.speed * turbo;
-            this.setColor(this.HSVtoRGB(this.h_val/360, 1, 1));
-            this.h_val = (this.h_val + 5) % 360;
+            this.x = Math.max(this.x, deltaX);
+            isHold = true;
         }
         if (KEYS[cc.KEY.right]) {
             this.x += dt * Objs.Player.speed * turbo;
-            this.setColor(this.HSVtoRGB(this.h_val/360, 1, 1));
+            this.x = Math.min(this.x, cc.winSize.width - deltaX);
+            isHold = true;
+        }
+        if (isHold) {
+            this.setColor(this.HSVtoRGB(this.h_val / 360, 1, 1));
             this.h_val = (this.h_val + 5) % 360;
         }
         //if (KEYS[cc.KEY.shift]) {
@@ -59,21 +65,14 @@ var Player = cc.Sprite.extend({//main scene
         //else {
         //    this.setColor(cc.WHITE);
         //}
-        if (this.x + deltaX > cc.winSize.width) {
-            this.x = cc.winSize.width - deltaX;
+        if (this.cooldown <= 0) {
+            var bullet = new Bullet(this);
+            this.getParent().addChild(bullet);
+            this.cooldown = Objs.Player.atkRate;
         }
-        if (this.x - deltaX < 0) {
-            this.x = deltaX;
+        else {
+            this.cooldown -= dt;
         }
-        if (this.y + deltaY > cc.winSize.height) {
-            this.y = cc.winSize.height - deltaY;
-        }
-        if (this.y - deltaY < 0) {
-            this.y = deltaY;
-        }
-
-        var bullet = new Bullet(this.x, this.y);
-        this
     },
 
     checkCollision: function(){

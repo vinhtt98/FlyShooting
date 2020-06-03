@@ -4,8 +4,6 @@
 
 var GameLayer = cc.Layer.extend({//main scene
 
-    h_val: 0,
-
     ctor:function () {
         this._super();
 
@@ -15,6 +13,7 @@ var GameLayer = cc.Layer.extend({//main scene
     },
 
     update: function(dt){//update callback, run every frame
+
     },
 
     checkCollision: function(){
