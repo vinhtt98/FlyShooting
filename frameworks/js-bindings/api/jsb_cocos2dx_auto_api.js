@@ -2102,7 +2102,7 @@ create : function (
 },
 
 /**
- * @method Scene
+ * @method GameObject
  * @constructor
  */
 Scene : function (

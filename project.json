@@ -38,11 +38,18 @@
         "src/base/network/InPacketFactory.js",
         "src/base/Resource.js",
         "src/base/UIFactory.js",
+        "src/GameObject/Bullet.js",
+        "src/GameObject/Enemy.js",
+        "src/GameObject/GameController.js",
+        "src/GameObject/Player.js",
+        "src/Layer/GameLayer.js",
         "src/modules/animation/ScreenDragonbones.js",
         "src/modules/localization/ScreenLocalization.js",
         "src/modules/mainmenu/ScreenMenu.js",
         "src/modules/testnetwork/network/Network.js",
         "src/modules/testnetwork/network/Packet.js",
-        "src/modules/testnetwork/ScreenNetwork.js"
+        "src/modules/testnetwork/ScreenNetwork.js",
+        "src/resource.js",
+        "src/Scene/GameScene.js"
     ]
 }

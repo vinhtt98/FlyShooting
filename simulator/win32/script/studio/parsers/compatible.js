@@ -181,7 +181,7 @@
 
         //@deprecated This function will be deprecated sooner or later please use ccs.load
         /**
-         * Create Scene Node
+         * Create GameObject Node
          * @param file
          * @returns {*}
          */
