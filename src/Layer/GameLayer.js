@@ -7,6 +7,7 @@ var GameLayer = cc.Layer.extend({//main scene
     ctor:function () {
         this._super();
 
+        this.addEnemyLayer();
         this.addPlayer();
 
         this.scheduleUpdate();//runs update() every frame
@@ -23,4 +24,9 @@ var GameLayer = cc.Layer.extend({//main scene
         var player = new Player();
         this.addChild(player);
     },
+
+    addEnemyLayer :function(){
+        var enemyLayer = new EnemyLayer();
+        this.addChild(enemyLayer);
+    }
 });

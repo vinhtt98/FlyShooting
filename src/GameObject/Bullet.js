@@ -24,12 +24,13 @@ var Bullet = cc.Sprite.extend({//main scene
 
     update: function(dt){//update callback, run every frame
         this.y += dt * Objs.bulletSpeed;
-        if (this.y < -cc.winSize.height || this.y > cc.winSize.height * 2) {
+        if (this.y < -cc.winSize.height ||
+            this.y > cc.winSize.height * 2 ||
+            this.x < -cc.winSize.width ||
+            this.x > cc.winSize.width * 2) {
             this.removeFromParent();
         }
-        if (this.x < -cc.winSize.width || this.x > cc.winSize.width * 2) {
-            this.removeFromParent();
-        }
+
     },
 
     collideRect:function (x, y) {

@@ -42,6 +42,7 @@
         "src/GameObject/Enemy.js",
         "src/GameObject/GameController.js",
         "src/GameObject/Player.js",
+        "src/Layer/EnemyLayer.js",
         "src/Layer/GameLayer.js",
         "src/modules/animation/ScreenDragonbones.js",
         "src/modules/localization/ScreenLocalization.js",
