@@ -24,6 +24,18 @@ var Bullet = cc.Sprite.extend({//main scene
 
     update: function(dt){//update callback, run every frame
         this.y += dt * Objs.bulletSpeed;
+        if (this.y < -cc.winSize.height || this.y > cc.winSize.height * 2) {
+            this.removeFromParent();
+        }
+        if (this.x < -cc.winSize.width || this.x > cc.winSize.width * 2) {
+            this.removeFromParent();
+        }
+    },
+
+    collideRect:function (x, y) {
+        var deltaX = this.getContentSize().width * this.getScale() / 2;
+        var deltaY = this.getContentSize().height * this.getScale() / 2;
+        return cc.rect(x - deltaX, y - deltaY, deltaX * 2, deltaY * 2);
     },
 
     checkCollision: function(){

@@ -75,6 +75,12 @@ var Player = cc.Sprite.extend({//main scene
         }
     },
 
+    collideRect:function (x, y) {
+        var deltaX = this.getContentSize().width * this.getScale() / 2;
+        var deltaY = this.getContentSize().height * this.getScale() / 2;
+        return cc.rect(x - deltaX, y - deltaY, deltaX * 2, deltaY * 2);
+    },
+
     checkCollision: function(){
     },
 
