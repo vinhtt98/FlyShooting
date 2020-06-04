@@ -5,21 +5,10 @@
 var KEYS = [];
 
 var Objs = { //global objects
-    Enemies: [{
-        go: null,
-        health: 15,
-        speed: 500,
-        atkRate: 0.25
-    }],
-    Player: {
-        go: null,
-        health: 100,
-        speed: 500,
-        atkRate: 0.25
-    },
+    Enemies: [],
+    Player: null,
     enemyBullets: [],
-    playerBullets: [],
-    bulletSpeed: 1500
+    playerBullets: []
 }
 
 var timePlayed = 0; //game time

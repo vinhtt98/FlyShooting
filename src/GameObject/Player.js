@@ -4,6 +4,11 @@
 
 var Player = cc.Sprite.extend({//main scene
 
+    health: 100,
+    speed: 500,
+    atkDmg: 25,
+    atkRate: 1,
+
     h_val: 0,
     cooldown: 0,
 
@@ -12,9 +17,8 @@ var Player = cc.Sprite.extend({//main scene
 
         this.setPosition(cc.winSize.width/2, cc.winSize.height/2 - 200);
         this.setScale(0.1);
-        this.setTag(1);
-
-        Objs.Player.go = this;
+        this.setLocalZOrder(1);
+        this.setTag(0);
 
         cc.eventManager.addListener({
             event: cc.EventListener.KEYBOARD,
@@ -35,22 +39,22 @@ var Player = cc.Sprite.extend({//main scene
         var deltaY = this.getContentSize().height * this.getScale() / 2;
         var isHold = false;
         if (KEYS[cc.KEY.up]) {
-            this.y += dt * Objs.Player.speed * turbo;
+            this.y += dt * this.speed * turbo;
             this.y = Math.min(this.y, cc.winSize.height - deltaY)
             isHold = true;
         }
         if (KEYS[cc.KEY.down]) {
-            this.y -= dt * Objs.Player.speed * turbo;
+            this.y -= dt * this.speed * turbo;
             this.y = Math.max(this.y, deltaY);
             isHold = true;
         }
         if (KEYS[cc.KEY.left]) {
-            this.x -= dt * Objs.Player.speed * turbo;
+            this.x -= dt * this.speed * turbo;
             this.x = Math.max(this.x, deltaX);
             isHold = true;
         }
         if (KEYS[cc.KEY.right]) {
-            this.x += dt * Objs.Player.speed * turbo;
+            this.x += dt * this.speed * turbo;
             this.x = Math.min(this.x, cc.winSize.width - deltaX);
             isHold = true;
         }
@@ -66,22 +70,27 @@ var Player = cc.Sprite.extend({//main scene
         //    this.setColor(cc.WHITE);
         //}
         if (this.cooldown <= 0) {
-            var bullet = new Bullet(this);
+            var bullet = new Bullet(this, this.atkDmg);
             this.getParent().addChild(bullet);
-            this.cooldown = Objs.Player.atkRate;
+            this.cooldown = this.atkRate;
         }
         else {
             this.cooldown -= dt;
         }
     },
 
-    collideRect:function (x, y) {
+    collideRect:function () {
         var deltaX = this.getContentSize().width * this.getScale() / 2;
         var deltaY = this.getContentSize().height * this.getScale() / 2;
-        return cc.rect(x - deltaX, y - deltaY, deltaX * 2, deltaY * 2);
+        return cc.rect(this.x - deltaX, this.y - deltaY, deltaX * 2, deltaY * 2);
     },
 
-    checkCollision: function(){
+    takeDamage: function(val) {
+        this.health -= val;
+    },
+
+    selfDestruct: function(){
+        this.removeFromParent();
     },
 
     HSVtoRGB: function(h, s, v) {
