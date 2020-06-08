@@ -6,9 +6,11 @@ var KEYS = [];
 
 var Objs = { //global objects
     Enemies: [],
+    EnemiesType: [],
     Player: null,
     enemyBullets: [],
-    playerBullets: []
+    playerBullets: [],
+    Point: null
 }
 
 var timePlayed = 0; //game time

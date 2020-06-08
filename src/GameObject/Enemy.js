@@ -4,20 +4,51 @@
 
 var Enemy = cc.Sprite.extend({
 
+    type: 1,
+
+    maxHealth: 100,
     health: 100,
     atkDmg: 5,
-    atkRate: 10000,
+    atkRate: 10,
+    atkChance: 0.02,
 
     cooldown: 0,
 
-    ctor:function (x, y) {
-        this._super(res.box_png);
+    ctor:function (x, y, type) {
+        switch (type) {
+            case 2:
+                this._super(res.box2_png);
+                break;
+            case 3:
+                this._super(res.box3_png);
+                break;
+            default:
+                this._super(res.box1_png);
+        }
 
         this.setPosition(x, y);
         this.setRotation(180);
-        this.setScale(0.1);
+        this.setScale(0.15);
         this.setLocalZOrder(1);
         this.setTag(0);
+        this.type = type;
+
+        switch (this.type) {
+            case 2:
+                this.maxHealth = 150;
+                this.atkDmg = 7;
+                this.atkRate = 7;
+                this.atkChance = 0.1;
+                break;
+            case 3:
+                this.maxHealth = 200;
+                this.atkDmg = 10;
+                this.atkRate = 5;
+                this.atkChance = 0.2;
+                break;
+            default:
+        }
+        this.health = this.maxHealth;
 
         this.scheduleUpdate();//runs update() every frame
     },
@@ -32,7 +63,18 @@ var Enemy = cc.Sprite.extend({
             this.cooldown -= dt;
         }
 
-        this.setColor(cc.color(255, 255 * this.health / 100, 255 * this.health / 100));
+        this.setColor(cc.color(255, 255 * this.health / this.maxHealth, 255 * this.health / this.maxHealth));
+
+        if (this.cooldown <= 0) {
+            if (Math.random() < this.atkChance) {
+                var bullet = new Bullet(this, this.atkDmg);
+                this.getParent().getParent().addChild(bullet);
+            }
+            this.cooldown = this.atkRate;
+        }
+        else {
+            this.cooldown -= dt;
+        }
 
         if (this.health <= 0) {
             this.selfDestruct();
@@ -50,6 +92,7 @@ var Enemy = cc.Sprite.extend({
     },
 
     selfDestruct: function(){
+        Objs.Point += this.type * 10;
         this.removeFromParent();
     }
 });

@@ -7,7 +7,7 @@ var Player = cc.Sprite.extend({//main scene
     health: 100,
     speed: 500,
     atkDmg: 25,
-    atkRate: 1,
+    atkRate: 0.25,
 
     h_val: 0,
     cooldown: 0,
@@ -16,7 +16,7 @@ var Player = cc.Sprite.extend({//main scene
         this._super(res.box_png);
 
         this.setPosition(cc.winSize.width/2, cc.winSize.height/2 - 200);
-        this.setScale(0.1);
+        this.setScale(0.15);
         this.setLocalZOrder(1);
         this.setTag(0);
 

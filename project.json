@@ -44,6 +44,7 @@
         "src/GameObject/Player.js",
         "src/Layer/EnemyLayer.js",
         "src/Layer/GameLayer.js",
+        "src/Layer/UILayer.js",
         "src/modules/animation/ScreenDragonbones.js",
         "src/modules/localization/ScreenLocalization.js",
         "src/modules/mainmenu/ScreenMenu.js",
