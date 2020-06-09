@@ -51,7 +51,9 @@
         "src/modules/testnetwork/network/Network.js",
         "src/modules/testnetwork/network/Packet.js",
         "src/modules/testnetwork/ScreenNetwork.js",
-        "src/resource.js",
-        "src/Scene/GameScene.js"
+        "src/Scene/GameScene.js",
+        "src/Scene/WinScene.js",
+        "src/Scene/LoseScene.js",
+        "src/Scene/MenuScene.js"
     ]
 }

@@ -19,7 +19,13 @@ var res = {
     ZCSD_POPUP_MINI_GAME:"zcsd/game/mini_game/PopupMiniGame.json",
 
     //images
-    Slot1_png : "zcsd/slot1.png"
+    Slot1_png : "zcsd/slot1.png",
+
+    box_png : 'res/sprite/box.png',
+    box1_png : 'res/sprite/box1.png',
+    box2_png : 'res/sprite/box2.png',
+    box3_png : 'res/sprite/box3.png',
+    TitleFont: 'res/fonts/Marker Felt.ttf'
 };
 
 var g_resources = [
@@ -72,5 +78,11 @@ var g_resources = [
     "zcsd/screen_localize.json",
     "zcsd/screen_menu.json",
     "zcsd/screen_network.json",
-    "zcsd/screen_zalo.json"
+    "zcsd/screen_zalo.json",
+
+    res.box_png,
+    res.box1_png,
+    res.box2_png,
+    res.box3_png,
+    res.TitleFont
 ];

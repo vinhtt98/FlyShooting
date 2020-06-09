@@ -9,8 +9,8 @@ var Enemy = cc.Sprite.extend({
     maxHealth: 100,
     health: 100,
     atkDmg: 5,
-    atkRate: 10,
-    atkChance: 0.02,
+    atkRate: 5,
+    atkChance: 0.2,
 
     cooldown: 0,
 
@@ -28,7 +28,7 @@ var Enemy = cc.Sprite.extend({
 
         this.setPosition(x, y);
         this.setRotation(180);
-        this.setScale(0.15);
+        this.setScale(0.2);
         this.setLocalZOrder(1);
         this.setTag(0);
         this.type = type;
@@ -37,32 +37,24 @@ var Enemy = cc.Sprite.extend({
             case 2:
                 this.maxHealth = 150;
                 this.atkDmg = 7;
-                this.atkRate = 7;
-                this.atkChance = 0.1;
+                this.atkRate = 3;
+                this.atkChance = 0.4;
                 break;
             case 3:
                 this.maxHealth = 200;
                 this.atkDmg = 10;
-                this.atkRate = 5;
-                this.atkChance = 0.2;
+                this.atkRate = 2;
+                this.atkChance = 0.6;
                 break;
             default:
         }
         this.health = this.maxHealth;
+        this.cooldown = this.atkRate;
 
         this.scheduleUpdate();//runs update() every frame
     },
 
     update: function(dt){//update callback, run every frame
-        if (this.cooldown <= 0) {
-            var bullet = new Bullet(this, this.atkDmg);
-            this.getParent().addChild(bullet);
-            this.cooldown = this.atkRate;
-        }
-        else {
-            this.cooldown -= dt;
-        }
-
         this.setColor(cc.color(255, 255 * this.health / this.maxHealth, 255 * this.health / this.maxHealth));
 
         if (this.cooldown <= 0) {
@@ -84,7 +76,7 @@ var Enemy = cc.Sprite.extend({
     collideRect:function () {
         var deltaX = this.getContentSize().width * this.getScale() / 2;
         var deltaY = this.getContentSize().height * this.getScale() / 2;
-        return cc.rect(this.x - deltaX, this.y - deltaY, deltaX * 2, deltaY * 2);
+        return cc.rect(this.x - deltaX + this.getParent().dx, this.y - deltaY, deltaX * 2, deltaY * 2);
     },
 
     takeDamage: function(val) {
@@ -93,6 +85,7 @@ var Enemy = cc.Sprite.extend({
 
     selfDestruct: function(){
         Objs.Point += this.type * 10;
+        this.getParent().deadCnt++;
         this.removeFromParent();
     }
 });

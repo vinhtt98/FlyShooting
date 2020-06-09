@@ -7,10 +7,12 @@ var Player = cc.Sprite.extend({//main scene
     health: 100,
     speed: 500,
     atkDmg: 25,
-    atkRate: 0.25,
+    atkRate: 0.5,
 
     h_val: 0,
     cooldown: 0,
+
+    isDead:false,
 
     ctor:function () {
         this._super(res.box_png);
@@ -34,6 +36,9 @@ var Player = cc.Sprite.extend({//main scene
     },
 
     update: function(dt){//update callback, run every frame
+        if (this.isDead)
+            return;
+
         var turbo = KEYS[cc.KEY.shift] ? 4 : 1;
         var deltaX = this.getContentSize().width * this.getScale() / 2;
         var deltaY = this.getContentSize().height * this.getScale() / 2;
@@ -77,6 +82,10 @@ var Player = cc.Sprite.extend({//main scene
         else {
             this.cooldown -= dt;
         }
+
+        if (this.health <= 0) {
+            this.selfDestruct();
+        }
     },
 
     collideRect:function () {
@@ -90,6 +99,8 @@ var Player = cc.Sprite.extend({//main scene
     },
 
     selfDestruct: function(){
+        fr.view(LoseScene);
+        this.isDead = true;
         this.removeFromParent();
     },
 

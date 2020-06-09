@@ -26,7 +26,7 @@ var Bullet = cc.Sprite.extend({//main scene
         }
         else {
             this.direction = -1;
-            this.setPosition(go.x, go.y);
+            this.setPosition(go.x + go.getParent().dx, go.y);
             this.setScale(0.05);
             this.setColor(cc.color.RED);
             this.setLocalZOrder(0);
@@ -44,8 +44,7 @@ var Bullet = cc.Sprite.extend({//main scene
             this.x < -cc.winSize.width ||
             this.x > cc.winSize.width * 2) {
             this.selfDestruct();
-        }
-        if (this.removed) {
+        }if (this.removed) {
             return;
         }
         this.checkCollision();
@@ -66,17 +65,18 @@ var Bullet = cc.Sprite.extend({//main scene
         }
         else {
             var player = Objs.Player;
-            if (cc.rectIntersectsRect(this.collideRect(), player.collideRect())) {
-                player.takeDamage(this.damage);
-                this.selfDestruct();
-                return;
-            }
+            if (cc.sys.isObjectValid(player))
+                if (cc.rectIntersectsRect(this.collideRect(), player.collideRect())) {
+                    player.takeDamage(this.damage);
+                    this.selfDestruct();
+                    return;
+                }
         }
     },
 
     selfDestruct: function(){
-        this.removeFromParent();
         this.removed = true;
+        this.removeFromParent();
     },
 
     collideRect:function () {
