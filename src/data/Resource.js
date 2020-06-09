@@ -25,7 +25,21 @@ var res = {
     box1_png : 'res/sprite/box1.png',
     box2_png : 'res/sprite/box2.png',
     box3_png : 'res/sprite/box3.png',
-    TitleFont: 'res/fonts/Marker Felt.ttf'
+    TitleFont: 'res/fonts/Marker Felt.ttf',
+
+    invader_a_1_png : 'res/sprite/InvaderA_00@2x.png',
+    invader_a_2_png : 'res/sprite/InvaderA_01@2x.png',
+    invader_b_1_png : 'res/sprite/InvaderB_00@2x.png',
+    invader_b_2_png : 'res/sprite/InvaderB_01@2x.png',
+    invader_c_1_png : 'res/sprite/InvaderC_00@2x.png',
+    invader_c_2_png : 'res/sprite/InvaderC_01@2x.png',
+    invader_a_png : 'res/sprite/InvaderA.png',
+    invader_a_plist : 'res/sprite/InvaderA.plist',
+    invader_b_png : 'res/sprite/InvaderB.png',
+    invader_b_plist : 'res/sprite/InvaderB.plist',
+    invader_c_png : 'res/sprite/InvaderC.png',
+    invader_c_plist : 'res/sprite/InvaderC.plist',
+    ship_png : 'res/sprite/Ship@2x.png'
 };
 
 var g_resources = [
@@ -84,5 +98,18 @@ var g_resources = [
     res.box1_png,
     res.box2_png,
     res.box3_png,
-    res.TitleFont
+    res.TitleFont,
+    res.invader_a_1_png,
+    res.invader_a_2_png,
+    res.invader_b_1_png,
+    res.invader_b_2_png,
+    res.invader_c_1_png,
+    res.invader_c_2_png,
+    res.invader_a_png,
+    res.invader_a_plist,
+    res.invader_b_png,
+    res.invader_b_plist,
+    res.invader_c_png,
+    res.invader_c_plist,
+    res.ship_png
 ];
